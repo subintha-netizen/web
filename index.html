@@ -260,39 +260,65 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Text certification with modern card */
+        /* Text certification - Official Document Style */
         .cert-text {
-            padding: 16px;
+            padding: 20px;
             background: white;
-            border: 2px solid rgba(102, 126, 234, 0.2);
-            border-radius: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
             cursor: move;
-            line-height: 1.6;
-            min-width: 200px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            line-height: 1.8;
+            min-width: 220px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .cert-text:hover {
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-            border-color: rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            border-color: #9ca3af;
         }
 
-        .cert-line-1 {
-            font-weight: 700;
+        /* สำเนาถูกต้อง - header */
+        .cert-header {
+            font-weight: 600;
             text-align: center;
             color: #1f2937;
-            font-size: 16px;
+            font-size: 15px;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
         }
 
-        .cert-line-2 {
+        /* พื้นที่สำหรับลายเซ็น */
+        .cert-signature-space {
+            min-height: 60px;
             text-align: center;
-            color: #4b5563;
-            font-size: 14px;
+            color: #9ca3af;
+            font-size: 11px;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px dashed #e5e7eb;
+            margin: 8px 0;
         }
 
-        .cert-line-3 {
-            font-style: italic;
+        /* ชื่อผู้รับรอง */
+        .cert-name {
+            text-align: center;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ตำแหน่ง */
+        .cert-position {
+            text-align: center;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        /* วันที่ */
+        .cert-date {
             text-align: center;
             color: #6b7280;
             font-size: 13px;
@@ -520,46 +546,69 @@
                     </div>
 
                     <div id="certTextControls" style="display: none;" class="space-y-3 pl-6 border-l-2 border-purple-200">
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-800">
+                            <p class="font-semibold mb-1">💡 หลักการรับรองสำเนาราชการ:</p>
+                            <p class="text-xs leading-relaxed">
+                                1. เพิ่มลายเซ็นก่อน<br>
+                                2. วางลายเซ็นไว้ด้านบนชื่อ<br>
+                                3. ใส่ข้อความรับรอง (ชื่อและวันที่จะอยู่ด้านล่างลายเซ็น)
+                            </p>
+                        </div>
+
                         <div>
                             <label for="certName" class="block text-xs font-semibold text-gray-700 mb-1.5">
-                                ชื่อผู้รับรอง
+                                ชื่อผู้รับรอง <span class="text-red-500">*</span>
                             </label>
                             <input
                                 type="text"
                                 id="certName"
-                                placeholder="(นายสมศักดิ์ รักชาติ)"
+                                placeholder="นายสมศักดิ์ รักชาติ"
                                 class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg text-sm modern-input"
                                 aria-label="ชื่อผู้รับรอง"
+                            />
+                            <p class="text-xs text-gray-500 mt-1">วงเล็บจะถูกเพิ่มอัตโนมัติ</p>
+                        </div>
+
+                        <div>
+                            <label for="certPosition" class="block text-xs font-semibold text-gray-700 mb-1.5">
+                                ตำแหน่ง / หน่วยงาน
+                            </label>
+                            <input
+                                type="text"
+                                id="certPosition"
+                                placeholder="เจ้าหน้าที่ / ชื่อหน่วยงาน (ถ้ามี)"
+                                class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg text-sm modern-input"
+                                aria-label="ตำแหน่งหรือหน่วยงาน"
                             />
                         </div>
 
                         <div>
                             <label class="block text-xs font-semibold text-gray-700 mb-1.5">
-                                ระยะห่าง บรรทัด 1 ↔ 2: <span id="gap1Value" class="text-purple-600 font-bold">8</span>px
+                                ระยะห่างจากลายเซ็น → ชื่อ: <span id="gap1Value" class="text-purple-600 font-bold">15</span>px
                             </label>
                             <input
                                 type="range"
                                 id="gap1Slider"
-                                min="0"
-                                max="30"
-                                value="8"
+                                min="5"
+                                max="40"
+                                value="15"
                                 class="w-full modern-slider cursor-pointer"
-                                aria-label="ระยะห่างบรรทัดที่ 1"
+                                aria-label="ระยะห่างลายเซ็นถึงชื่อ"
                             />
                         </div>
 
                         <div>
                             <label class="block text-xs font-semibold text-gray-700 mb-1.5">
-                                ระยะห่าง บรรทัด 2 ↔ 3: <span id="gap2Value" class="text-purple-600 font-bold">8</span>px
+                                ระยะห่างระหว่างบรรทัดข้อความ: <span id="gap2Value" class="text-purple-600 font-bold">6</span>px
                             </label>
                             <input
                                 type="range"
                                 id="gap2Slider"
-                                min="0"
-                                max="30"
-                                value="8"
+                                min="2"
+                                max="20"
+                                value="6"
                                 class="w-full modern-slider cursor-pointer"
-                                aria-label="ระยะห่างบรรทัดที่ 2"
+                                aria-label="ระยะห่างระหว่างบรรทัด"
                             />
                         </div>
                     </div>
@@ -627,12 +676,14 @@
                         <i data-lucide="chevron-down" class="w-4 h-4 md:hidden"></i>
                     </button>
                     <div id="instructionsContent" class="mt-3 text-xs text-gray-600 space-y-2 hidden md:block">
-                        <p class="instruction-item">อัปโหลดรูปภาพหลายไฟล์พร้อมกัน</p>
-                        <p class="instruction-item">คลิกเพื่อเลือก ลากเพื่อย้าย</p>
-                        <p class="instruction-item">ลายเซ็น: สลับโหมด วาด/ย้าย ด้วยปุ่มควบคุม</p>
+                        <p class="font-semibold text-gray-800 mb-2">📋 วิธีใช้งาน:</p>
+                        <p class="instruction-item">อัปโหลดรูปภาพเอกสารหลายไฟล์พร้อมกัน</p>
+                        <p class="instruction-item">จัดวางและย้ายรูปด้วยการลาก</p>
+                        <p class="instruction-item">เพิ่มลายเซ็น → วาดลายเซ็น → สลับโหมดย้าย</p>
+                        <p class="instruction-item">วางลายเซ็นไว้เหนือชื่อผู้รับรอง</p>
+                        <p class="instruction-item">เพิ่มข้อความรับรอง (ชื่อ/ตำแหน่ง/วันที่)</p>
                         <p class="instruction-item">ปรับขนาดด้วยจุดมุมขวาล่าง</p>
-                        <p class="instruction-item">ใช้ปุ่มควบคุมเพื่อหมุนหรือลบ</p>
-                        <p class="instruction-item">ดาวน์โหลดเป็น JPG หรือ PDF</p>
+                        <p class="instruction-item">ดาวน์โหลดเป็น JPG หรือ PDF ได้ทันที</p>
                     </div>
                 </div>
             </div>
@@ -651,7 +702,8 @@
     <script>
         // ============================================
         // A4 Image Layout Application
-        // Version: 2.0 - Modern UI with Signature Movement
+        // Version: 2.1 - Official Document Style (Thai Government Standards)
+        // Signature placement above name following Thai official document standards
         // Libraries: Tailwind CSS, Lucide Icons, html2canvas, jsPDF
         // ============================================
 
@@ -680,8 +732,9 @@
                 certTextSettings: {
                     show: false,
                     name: '',
-                    gap1: 8,
-                    gap2: 8
+                    position: '',
+                    gap1: 15,
+                    gap2: 6
                 }
             };
 
@@ -694,6 +747,7 @@
                 showCertText: document.getElementById('showCertText'),
                 certTextControls: document.getElementById('certTextControls'),
                 certName: document.getElementById('certName'),
+                certPosition: document.getElementById('certPosition'),
                 gap1Slider: document.getElementById('gap1Slider'),
                 gap2Slider: document.getElementById('gap2Slider'),
                 gap1Value: document.getElementById('gap1Value'),
@@ -945,6 +999,7 @@
                 if (state.certTextSettings.show) {
                     if (existing) {
                         existing.name = state.certTextSettings.name;
+                        existing.position = state.certTextSettings.position;
                         existing.gap1 = state.certTextSettings.gap1;
                         existing.gap2 = state.certTextSettings.gap2;
                         updateCertTextElement(existing);
@@ -953,12 +1008,13 @@
                         createObject('text', {
                             subtype: 'certification',
                             name: state.certTextSettings.name,
+                            position: state.certTextSettings.position,
                             gap1: state.certTextSettings.gap1,
                             gap2: state.certTextSettings.gap2,
-                            width: 250,
-                            height: 100,
-                            x: paperRect.width / 2 - 125,
-                            y: paperRect.height - 150
+                            width: 280,
+                            height: 180,
+                            x: paperRect.width / 2 - 140,
+                            y: paperRect.height - 220
                         });
                     }
                 } else {
@@ -973,11 +1029,25 @@
                 if (element) {
                     const content = element.querySelector('.cert-text');
                     if (content) {
-                        content.innerHTML = `
-                            <div class="cert-line-1">สำเนาถูกต้อง</div>
-                            <div class="cert-line-2" style="margin-top: ${obj.gap1}px">${obj.name || '(ชื่อผู้รับรอง)'}</div>
-                            <div class="cert-line-3" style="margin-top: ${obj.gap2}px">วันที่ ${getThaiDate()}</div>
-                        `;
+                        // สร้าง HTML ตามหลักหนังสือราชการ
+                        let html = '<div class="cert-header">สำเนาถูกต้อง</div>';
+
+                        // พื้นที่สำหรับลายเซ็น
+                        html += '<div class="cert-signature-space" style="margin-bottom: ' + obj.gap1 + 'px">(วางลายเซ็นด้านบน)</div>';
+
+                        // ชื่อผู้รับรอง
+                        const displayName = obj.name ? '(' + obj.name + ')' : '(ชื่อผู้รับรอง)';
+                        html += '<div class="cert-name">' + displayName + '</div>';
+
+                        // ตำแหน่ง (ถ้ามี)
+                        if (obj.position) {
+                            html += '<div class="cert-position" style="margin-top: ' + obj.gap2 + 'px">' + obj.position + '</div>';
+                        }
+
+                        // วันที่
+                        html += '<div class="cert-date" style="margin-top: ' + obj.gap2 + 'px">วันที่ ' + getThaiDate() + '</div>';
+
+                        content.innerHTML = html;
                     }
                 }
             }
@@ -1123,11 +1193,21 @@
                 } else if (obj.type === 'text' && obj.subtype === 'certification') {
                     const textDiv = document.createElement('div');
                     textDiv.className = 'cert-text';
-                    textDiv.innerHTML = `
-                        <div class="cert-line-1">สำเนาถูกต้อง</div>
-                        <div class="cert-line-2" style="margin-top: ${obj.gap1}px">${obj.name || '(ชื่อผู้รับรอง)'}</div>
-                        <div class="cert-line-3" style="margin-top: ${obj.gap2}px">วันที่ ${getThaiDate()}</div>
-                    `;
+
+                    // สร้าง HTML ตามหลักหนังสือราชการ
+                    let html = '<div class="cert-header">สำเนาถูกต้อง</div>';
+                    html += '<div class="cert-signature-space" style="margin-bottom: ' + obj.gap1 + 'px">(วางลายเซ็นด้านบน)</div>';
+
+                    const displayName = obj.name ? '(' + obj.name + ')' : '(ชื่อผู้รับรอง)';
+                    html += '<div class="cert-name">' + displayName + '</div>';
+
+                    if (obj.position) {
+                        html += '<div class="cert-position" style="margin-top: ' + obj.gap2 + 'px">' + obj.position + '</div>';
+                    }
+
+                    html += '<div class="cert-date" style="margin-top: ' + obj.gap2 + 'px">วันที่ ' + getThaiDate() + '</div>';
+
+                    textDiv.innerHTML = html;
                     div.appendChild(textDiv);
                 } else if (obj.type === 'signature') {
                     // Mode indicator
@@ -1568,6 +1648,11 @@
                     updateCertTextDisplay();
                 });
 
+                elements.certPosition.addEventListener('input', function() {
+                    state.certTextSettings.position = this.value;
+                    updateCertTextDisplay();
+                });
+
                 elements.gap1Slider.addEventListener('input', function() {
                     state.certTextSettings.gap1 = parseInt(this.value);
                     elements.gap1Value.textContent = this.value;
@@ -1642,7 +1727,7 @@
                     window.lucide.createIcons();
                 }
 
-                console.log('A4 Image Layout Application v2.0 initialized - Modern UI with Signature Movement');
+                console.log('A4 Image Layout Application v2.1 initialized - Official Document Style with Signature Above Name');
             }
 
             if (document.readyState === 'loading') {
